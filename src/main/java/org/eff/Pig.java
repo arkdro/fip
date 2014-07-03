@@ -9,6 +9,7 @@ import java.util.Random;
 /**
  *
  * @author user1
+ * A thing that moves inside a place.
  */
 public class Pig {
     private int x;
