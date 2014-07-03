@@ -98,12 +98,12 @@ public class Pig {
     }
 
     public void step(int min_x, int max_x, int min_y, int max_y) {
-        int x = move_rest - speed;
-        if(x > 0) {
-            move_rest = x;
+        int cur_step = move_rest - speed;
+        if(cur_step > 0) {
+            move_rest = cur_step;
         } else {
             update_coordinates(min_x, max_x, min_y, max_y);
-            move_rest = x + MAX_SPEED;
+            move_rest = cur_step + MAX_SPEED;
         }
     }
 }
