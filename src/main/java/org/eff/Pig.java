@@ -17,6 +17,27 @@ public class Pig {
     private int speed, move_rest;
     private dirs dir;
 
+    /**
+     * @return the x
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * @return the y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * @return the speed
+     */
+    public int getSpeed() {
+        return speed;
+    }
+
     private static enum dirs {
 
         NW(-1, 1),  N(0, 1),  NE(1, 1),
