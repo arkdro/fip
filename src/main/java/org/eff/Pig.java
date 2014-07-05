@@ -86,14 +86,14 @@ public class Pig {
     public void update_coordinates(int min_x, int max_x, int min_y, int max_y) {
         int dx = dir.dx;
         int dy = dir.dy;
-        int new_x = x + dx;
-        if(new_x < min_x || x > max_x) {
+        int new_x = getX() + dx;
+        if(new_x < min_x || getX() > max_x) {
             dir = dirs.flip_x_dir(dir);
         } else {
             x = new_x;
         }
-        int new_y = y + dy;
-        if(new_y < min_y || y > max_y) {
+        int new_y = getY() + dy;
+        if(new_y < min_y || getY() > max_y) {
             dir = dirs.flip_y_dir(dir);
         } else {
             y = new_y;
@@ -111,15 +111,15 @@ public class Pig {
 
     @Override
     public String toString(){
-        return "x=" + x
-                + ", y=" + y
-                + ", spd=" + speed
+        return "x=" + getX()
+                + ", y=" + getY()
+                + ", spd=" + getSpeed()
                 + ", rest=" + move_rest
                 + ", dir=" + dir.toString();
     }
 
     public void step(int min_x, int max_x, int min_y, int max_y) {
-        int cur_step = move_rest - speed;
+        int cur_step = move_rest - getSpeed();
         if(cur_step > 0) {
             move_rest = cur_step;
         } else {
