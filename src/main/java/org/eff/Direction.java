@@ -53,7 +53,7 @@ enum Direction {
         return NW;
     }
 
-    static Direction flip_y_dir(Direction d) {
+    public static Direction flip_y_dir(Direction d) {
         switch (d) {
             case NW:
                 return SW;
