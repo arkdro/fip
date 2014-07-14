@@ -66,6 +66,13 @@ public class Pig {
         dir = Direction.values()[dir_idx];
     }
 
+    public Pig(int x, int y, int speed, Direction dir){
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.dir = dir;
+    }
+
     @Override
     public String toString(){
         return "x=" + getX()
