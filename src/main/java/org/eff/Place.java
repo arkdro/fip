@@ -23,7 +23,7 @@ public class Place {
         for (int i = 0; i < n_pigs; i++) {
             int x = r.nextInt(width);
             int y = r.nextInt(height);
-            p[i] = new Pig(x, y);
+            p[i] = new PigBuilder().setX(x).setY(y).createPigShort();
         }
         pigs = p;
     }
