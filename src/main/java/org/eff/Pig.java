@@ -14,8 +14,9 @@ import java.util.Random;
 public class Pig {
     private int x;
     private int y;
-    private int speed, move_rest;
+    private int speed;
     private Direction dir;
+    private int move_rest = MAX_SPEED;
 
     /**
      * @return the x
@@ -61,7 +62,6 @@ public class Pig {
         this.x = x;
         this.y = y;
         speed = r.nextInt(MAX_SPEED) + 1;
-        move_rest = MAX_SPEED;
         int dir_idx = r.nextInt(Direction.values().length);
         dir = Direction.values()[dir_idx];
     }
