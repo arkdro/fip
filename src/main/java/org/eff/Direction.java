@@ -30,7 +30,7 @@ enum Direction {
         this.dy = dy;
     }
 
-    static Direction flip_x_dir(Direction d) {
+    public static Direction flip_x_dir(Direction d) {
         switch (d) {
             case NW:
                 return NE;
