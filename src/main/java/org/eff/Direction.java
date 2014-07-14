@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.eff;
+
+import java.util.Random;
 
 /**
  *
@@ -28,6 +29,12 @@ enum Direction {
     Direction(int dx, int dy) {
         this.dx = dx;
         this.dy = dy;
+    }
+
+    public static Direction random_direction() {
+        Random r = new Random();
+        int dir_idx = r.nextInt(Direction.values().length);
+        return Direction.values()[dir_idx];
     }
 
     public static Direction flip_x_dir(Direction d) {

@@ -62,8 +62,7 @@ public class Pig {
         this.x = x;
         this.y = y;
         speed = r.nextInt(MAX_SPEED) + 1;
-        int dir_idx = r.nextInt(Direction.values().length);
-        dir = Direction.values()[dir_idx];
+        dir = Direction.random_direction();
     }
 
     public Pig(int x, int y, int speed, Direction dir){
