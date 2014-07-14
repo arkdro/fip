@@ -43,8 +43,10 @@ public class Pig {
         return dir;
     }
 
-    private static final int MAX_SPEED = 10;
     private static Random r = new Random();
+
+    public static final int MAX_SPEED = 10;
+
     public void update_coordinates(int min_x, int max_x, int min_y, int max_y) {
         int dx = dir.getDx();
         int dy = dir.getDy();
