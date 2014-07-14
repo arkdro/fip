@@ -83,6 +83,28 @@ public class PigTest {
      * Test of step method, of class Pig.
      */
     @Test
-    public void test_step() {
+    public void test_step1() {
+        Pig pig = new PigBuilder()
+                .setX(1)
+                .setY(1)
+                .setSpeed(Pig.MAX_SPEED + 1)
+                .setDir(Direction.NE)
+                .createPig();
+        pig.step(0, Pig.MAX_SPEED * 10, 0, Pig.MAX_SPEED * 10);
+        assertEquals(2, pig.getX());
+        assertEquals(2, pig.getY());
+    }
+
+    @Test
+    public void test_step2() {
+        Pig pig = new PigBuilder()
+                .setX(1)
+                .setY(1)
+                .setSpeed(Pig.MAX_SPEED - 1)
+                .setDir(Direction.NE)
+                .createPig();
+        pig.step(0, Pig.MAX_SPEED * 10, 0, Pig.MAX_SPEED * 10);
+        assertEquals(1, pig.getX());
+        assertEquals(1, pig.getY());
     }
 }
