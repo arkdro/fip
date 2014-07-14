@@ -39,6 +39,10 @@ public class Pig {
         return speed;
     }
 
+    public Direction getDir() {
+        return dir;
+    }
+
     private static final int MAX_SPEED = 10;
     private static Random r = new Random();
     public void update_coordinates(int min_x, int max_x, int min_y, int max_y) {
