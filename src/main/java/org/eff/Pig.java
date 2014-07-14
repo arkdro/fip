@@ -49,13 +49,13 @@ public class Pig {
         int dx = dir.getDx();
         int dy = dir.getDy();
         int new_x = getX() + dx;
-        if(new_x < min_x || getX() > max_x) {
+        if(new_x < min_x || new_x > max_x) {
             dir = Direction.flip_x_dir(dir);
         } else {
             x = new_x;
         }
         int new_y = getY() + dy;
-        if(new_y < min_y || getY() > max_y) {
+        if(new_y < min_y || new_y > max_y) {
             dir = Direction.flip_y_dir(dir);
         } else {
             y = new_y;
