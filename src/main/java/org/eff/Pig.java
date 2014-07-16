@@ -17,6 +17,11 @@ public class Pig {
     private int speed;
     private Direction dir;
     private int move_rest = MAX_SPEED;
+    private int id = (int) (Math.random() * 1000);
+
+    public int getId() {
+        return id;
+    }
 
     /**
      * @return the x
@@ -80,7 +85,9 @@ public class Pig {
 
     @Override
     public String toString(){
-        return "x=" + getX()
+        return ""
+                + "id=" + getId()
+                + ", x=" + getX()
                 + ", y=" + getY()
                 + ", spd=" + getSpeed()
                 + ", rest=" + move_rest
