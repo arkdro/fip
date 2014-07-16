@@ -81,6 +81,7 @@ public class Place {
             int scaled_x = pig.getX() * CELL_SIZE;
             int scaled_y = pig.getY() * CELL_SIZE;
             g.fillRect(scaled_x, scaled_y, CELL_SIZE, CELL_SIZE);
+            //System.out.println("" + pig + ", " + color);
         }
     }
 
