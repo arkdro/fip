@@ -67,7 +67,7 @@ public class Place {
             Color.RED,
             Color.YELLOW
         };
-        int idx = (int) (Math.random() * colors.length);
+        int idx = i % colors.length;
         return colors[idx];
     }
 
