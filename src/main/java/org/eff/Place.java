@@ -19,6 +19,10 @@ public class Place {
     private int n_pigs = 3;
     private Pig[] pigs;
 
+    private void init() {
+        init_pigsty();
+    }
+
     private void init_pigsty() {
         Random r = new Random();
         Pig[] p = new Pig[n_pigs];
@@ -85,14 +89,14 @@ public class Place {
     }
 
     public Place() {
-        init_pigsty();
+        init();
     }
 
     public Place(int w, int h, int p) {
         width = w;
         height = h;
         n_pigs = p;
-        init_pigsty();
+        init();
     }
 
     public void run() {
