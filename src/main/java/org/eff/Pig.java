@@ -51,6 +51,12 @@ public class Pig {
 
     public static final int MAX_SPEED = 10;
 
+    /**
+     * - space.
+     * - horizontal wall. Flip y.
+     * - vertical wall. Flip x.
+     * - (inner | outer) corner. Flip x, y.
+     */
     public void update_coordinates(int min_x, int max_x, int min_y, int max_y) {
         int dx = dir.getDx();
         int dy = dir.getDy();
