@@ -17,10 +17,16 @@ public class Place {
     private int width = 5;
     private int height = 5;
     private int n_pigs = 3;
+    private Field field;
     private Pig[] pigs;
 
     private void init() {
+        init_field();
         init_pigsty();
+    }
+
+    private void init_field() {
+        field = new Field(width, height);
     }
 
     private void init_pigsty() {
@@ -42,7 +48,7 @@ public class Place {
 
     private void pigsty_one_step() {
         for(Pig pig: pigs) {
-            pig.step(0, width-1, 0, height-1);
+            pig.step(field);
         }
     }
 

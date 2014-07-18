@@ -18,6 +18,32 @@ public class Pig {
     private int move_rest = MAX_SPEED;
     private int id = (int) (Math.random() * 1000);
 
+    private void move_common() {
+        int dx = dir.getDx();
+        int dy = dir.getDy();
+        x += dx;
+        y += dy;
+    }
+
+    private void move_further() {
+        move_common();
+    }
+
+    private void bounce_corner() {
+        dir = Direction.flip_x_dir(Direction.flip_y_dir(dir));
+        move_common();
+    }
+
+    private void bounce_horizontal_wall() {
+        dir = Direction.flip_y_dir(dir);
+        move_common();
+    }
+
+    private void bounce_vertical_wall() {
+        dir = Direction.flip_x_dir(dir);
+        move_common();
+    }
+
     public int getId() {
         return id;
     }
@@ -57,20 +83,22 @@ public class Pig {
      * - vertical wall. Flip x.
      * - (inner | outer) corner. Flip x, y.
      */
-    public void update_coordinates(int min_x, int max_x, int min_y, int max_y) {
+    public void update_coordinates(Field field) {
         int dx = dir.getDx();
         int dy = dir.getDy();
-        int new_x = getX() + dx;
-        if(new_x < min_x || new_x > max_x) {
-            dir = Direction.flip_x_dir(dir);
-        } else {
-            x = new_x;
-        }
-        int new_y = getY() + dy;
-        if(new_y < min_y || new_y > max_y) {
-            dir = Direction.flip_y_dir(dir);
-        } else {
-            y = new_y;
+        switch (field.look_ahead(x, y, dx, dy)) {
+            case SPACE:
+                move_further();
+                break;
+            case CORNER:
+                bounce_corner();
+                break;
+            case HORIZONTAL_WALL:
+                bounce_horizontal_wall();
+                break;
+            case VERTICAL_WALL:
+                bounce_vertical_wall();
+                break;
         }
     }
 
@@ -99,12 +127,12 @@ public class Pig {
                 + ", dir=" + dir.toString();
     }
 
-    public void step(int min_x, int max_x, int min_y, int max_y) {
+    public void step(Field field) {
         int cur_step = move_rest - getSpeed();
         if(cur_step > 0) {
             move_rest = cur_step;
         } else {
-            update_coordinates(min_x, max_x, min_y, max_y);
+            update_coordinates(field);
             move_rest = cur_step + MAX_SPEED;
         }
     }
