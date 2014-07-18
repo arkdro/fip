@@ -19,6 +19,19 @@ public class Field {
         return y * width + x;
     }
 
+    private Cell get_cell(int x, int y, int dx, int dy) {
+        int new_x = x + dx;
+        int new_y = y + dy;
+        if (new_x < 0
+                || new_x >= width
+                || new_y < 0
+                || new_y >= height) {
+            return Cell.OUT;
+        }
+        int idx = index(new_x, new_y);
+        return field[idx];
+    }
+
     public Field(int w, int h) {
         this.width = w;
         this.height = h;
@@ -43,7 +56,29 @@ public class Field {
     }
 
     public Wall look_ahead(int x, int y, int dx, int dy) {
-        int idx = index(x, y);
+
+        Cell horizontal = get_cell(x, y, dx, 0);
+        Cell vertical = get_cell(x, y, 0, dy);
+        Cell diagonal = get_cell(x, y, dx, dy);
+        Cell current = get_cell(x, y, 0, 0);
+        if (diagonal == current) {
+            return Wall.SPACE;
+        } else if (horizontal == vertical) {
+            return Wall.CORNER;
+        } else if (horizontal == current) {
+            return Wall.HORIZONTAL_WALL;
+        } else if (vertical == current) {
+            return Wall.VERTICAL_WALL;
+        }
+        assert false : "should not happen, "
+                + x
+                + y
+                + dx
+                + dy
+                + current
+                + diagonal
+                + horizontal
+                + vertical;
         return Wall.SPACE;
     }
 }
