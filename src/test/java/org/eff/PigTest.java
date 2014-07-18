@@ -39,13 +39,16 @@ public class PigTest {
 
     @Test
     public void test_update_coordinates1() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
         Pig pig = new PigBuilder()
                 .setX(1)
                 .setY(1)
                 .setSpeed(1)
                 .setDir(Direction.NW)
                 .createPig();
-        pig.update_coordinates(0, 3, 0, 3);
+        pig.update_coordinates(field);
         assertEquals(0, pig.getX());
         assertEquals(2, pig.getY());
         assertEquals(Direction.NW, pig.getDir());
@@ -53,28 +56,34 @@ public class PigTest {
 
     @Test
     public void test_update_coordinates2() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
         Pig pig = new PigBuilder()
                 .setX(0)
                 .setY(1)
                 .setSpeed(1)
                 .setDir(Direction.NW)
                 .createPig();
-        pig.update_coordinates(0, 3, 0, 3);
-        assertEquals(0, pig.getX());
+        pig.update_coordinates(field);
+        assertEquals(1, pig.getX());
         assertEquals(2, pig.getY());
         assertEquals(Direction.NE, pig.getDir());
     }
 
     @Test
     public void test_update_coordinates3() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
         Pig pig = new PigBuilder()
-                .setX(3)
+                .setX(2)
                 .setY(1)
                 .setSpeed(1)
                 .setDir(Direction.NE)
                 .createPig();
-        pig.update_coordinates(0, 3, 0, 3);
-        assertEquals(3, pig.getX());
+        pig.update_coordinates(field);
+        assertEquals(1, pig.getX());
         assertEquals(2, pig.getY());
         assertEquals(Direction.NW, pig.getDir());
     }
@@ -84,26 +93,32 @@ public class PigTest {
      */
     @Test
     public void test_step1() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
         Pig pig = new PigBuilder()
                 .setX(1)
                 .setY(1)
                 .setSpeed(Pig.MAX_SPEED + 1)
                 .setDir(Direction.NE)
                 .createPig();
-        pig.step(0, Pig.MAX_SPEED * 10, 0, Pig.MAX_SPEED * 10);
+        pig.step(field);
         assertEquals(2, pig.getX());
         assertEquals(2, pig.getY());
     }
 
     @Test
     public void test_step2() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
         Pig pig = new PigBuilder()
                 .setX(1)
                 .setY(1)
                 .setSpeed(Pig.MAX_SPEED - 1)
                 .setDir(Direction.NE)
                 .createPig();
-        pig.step(0, Pig.MAX_SPEED * 10, 0, Pig.MAX_SPEED * 10);
+        pig.step(field);
         assertEquals(1, pig.getX());
         assertEquals(1, pig.getY());
     }
