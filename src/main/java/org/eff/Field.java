@@ -73,14 +73,14 @@ public class Field {
             return Wall.VERTICAL_WALL;
         }
         assert false : "should not happen, "
-                + x
-                + y
-                + dx
-                + dy
-                + current
-                + diagonal
-                + horizontal
-                + vertical;
+                + "x=" + x
+                + "y=" + y
+                + "dx=" + dx
+                + "dy=" + dy
+                + "current=" + current
+                + "diagonal=" + diagonal
+                + "horizontal=" + horizontal
+                + "vertical=" + vertical;
         return Wall.SPACE;
     }
 }
