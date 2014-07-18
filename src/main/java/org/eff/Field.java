@@ -61,6 +61,8 @@ public class Field {
         Cell vertical = get_cell(x, y, 0, dy);
         Cell diagonal = get_cell(x, y, dx, dy);
         Cell current = get_cell(x, y, 0, 0);
+        assert (current != Cell.OUT) : "current is OUT, x=" + x
+                + ", y=" + y + ", w=" + width + ", h=" + height;
         if (diagonal == current) {
             return Wall.SPACE;
         } else if (horizontal == vertical) {
