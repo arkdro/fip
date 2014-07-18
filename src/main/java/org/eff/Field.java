@@ -32,6 +32,11 @@ public class Field {
         return field[idx];
     }
 
+    private Cell get_cell(int x, int y) {
+        int idx = index(x, y);
+        return field[idx];
+    }
+
     public Field(int w, int h) {
         this.width = w;
         this.height = h;
@@ -48,11 +53,6 @@ public class Field {
 
     public int get_height() {
         return height;
-    }
-
-    public Cell get_cell(int x, int y) {
-        int idx = index(x, y);
-        return field[idx];
     }
 
     public Wall look_ahead(int x, int y, int dx, int dy) {
