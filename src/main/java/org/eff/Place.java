@@ -19,6 +19,7 @@ public class Place {
     private int n_pigs = 3;
     private Field field;
     private Pig[] pigs;
+    private boolean initial_plot = true;
 
     private void init() {
         init_field();
@@ -107,6 +108,8 @@ public class Place {
 
     public void run() {
         MyDrawPanel drawPanel = prepare_plot();
+        drawPanel.repaint();
+        initial_plot = false;
         for(int i = 0; i < 130; i++){
 //            System.out.println("i=" + i);
 //            print_pigsty();
@@ -119,9 +122,16 @@ public class Place {
     }
 
     class MyDrawPanel extends JPanel {
-        public void paintComponent(Graphics g){
-            g.setColor(Color.white);
-            g.fillRect(0,0,this.getWidth(),this.getHeight());
+
+        @Override
+        public void paintComponent(Graphics g) {
+            if (initial_plot) {
+                g.setColor(Color.gray);
+                g.fillRect(0, 0, this.getWidth(), this.getHeight());
+            } else {
+                g.setColor(Color.white);
+            }
+            g.fillRect(0, 0, width * CELL_SIZE, height * CELL_SIZE);
             plot_pigs(g);
         }
     }
