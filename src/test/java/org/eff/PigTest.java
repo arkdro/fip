@@ -88,6 +88,23 @@ public class PigTest {
         assertEquals(Direction.NW, pig.getDir());
     }
 
+    @Test
+    public void test_update_coordinates4() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
+        Pig pig = new PigBuilder()
+                .setX(2)
+                .setY(2)
+                .setSpeed(1)
+                .setDir(Direction.NE)
+                .createPig();
+        pig.update_coordinates(field);
+        assertEquals(1, pig.getX());
+        assertEquals(1, pig.getY());
+        assertEquals(Direction.SW, pig.getDir());
+    }
+
     /**
      * Test of step method, of class Pig.
      */
