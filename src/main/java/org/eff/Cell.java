@@ -12,5 +12,6 @@ package org.eff;
 enum Cell {
 
     GRASS,
-    DIRT
+    DIRT,
+    OUT // beyond the field
 }
