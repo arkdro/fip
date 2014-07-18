@@ -37,7 +37,7 @@ public class Field {
         this.height = h;
         int total = width * height;
         field = new Cell[total];
-        for(int i = 0; i < total; i++) {
+        for (int i = 0; i < total; i++) {
             field[i] = Cell.DIRT;
         }
     }
