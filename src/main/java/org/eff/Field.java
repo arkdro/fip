@@ -77,15 +77,15 @@ public class Field {
         } else if (vertical == current) {
             return Wall.VERTICAL_WALL;
         }
-        assert false : "should not happen, "
-                + "x=" + x
-                + "y=" + y
-                + "dx=" + dx
-                + "dy=" + dy
-                + "current=" + current
-                + "diagonal=" + diagonal
-                + "horizontal=" + horizontal
-                + "vertical=" + vertical;
+        assert false : "should not happen"
+                + ", x=" + x
+                + ", y=" + y
+                + ", dx=" + dx
+                + ", dy=" + dy
+                + ", current=" + current
+                + ", diagonal=" + diagonal
+                + ", horizontal=" + horizontal
+                + ", vertical=" + vertical;
         return Wall.SPACE;
     }
 }
