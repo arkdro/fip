@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.eff;
 
 import org.junit.AfterClass;
@@ -41,6 +40,40 @@ public class FieldTest {
         thrown.expect(AssertionError.class);
         thrown.expectMessage("current is OUT, x=3, y=1, w=3, h=3");
         field.look_ahead(3, 1, 1, 1);
+    }
+
+    @Test
+    public void test_look_ahead2() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
+        field.set_cell(0, 0, Cell.GRASS);
+        Wall wall = field.look_ahead(1, 1, -1, -1);
+        assertEquals(Wall.CORNER, wall);
+    }
+
+    @Test
+    public void test_look_ahead3() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
+        field.set_cell(0, 0, Cell.GRASS);
+        field.set_cell(1, 0, Cell.GRASS);
+        field.set_cell(2, 0, Cell.GRASS);
+        Wall wall = field.look_ahead(1, 1, -1, -1);
+        assertEquals(Wall.HORIZONTAL_WALL, wall);
+    }
+
+    @Test
+    public void test_look_ahead4() {
+        int width = 3;
+        int height = 3;
+        Field field = new Field(width, height);
+        field.set_cell(0, 0, Cell.GRASS);
+        field.set_cell(0, 1, Cell.GRASS);
+        field.set_cell(0, 2, Cell.GRASS);
+        Wall wall = field.look_ahead(1, 1, -1, -1);
+        assertEquals(Wall.VERTICAL_WALL, wall);
     }
 
 }
