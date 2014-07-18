@@ -82,6 +82,8 @@ public class Pig {
      * - horizontal wall. Flip y.
      * - vertical wall. Flip x.
      * - (inner | outer) corner. Flip x, y.
+     *
+     * a pig requires at least a two-cell wide road to move (bouncing from walls)
      */
     public void update_coordinates(Field field) {
         int dx = dir.getDx();
