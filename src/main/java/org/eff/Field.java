@@ -55,6 +55,11 @@ public class Field {
         return height;
     }
 
+    public void set_cell(int x, int y, Cell cell) {
+        int idx = index(x, y);
+        field[idx] = cell;
+    }
+
     public Wall look_ahead(int x, int y, int dx, int dy) {
 
         Cell horizontal = get_cell(x, y, dx, 0);
