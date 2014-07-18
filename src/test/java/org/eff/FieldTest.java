@@ -33,12 +33,6 @@ public class FieldTest {
     public static void tearDownClass() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-
     @Test
     public void test_look_ahead1() {
         int width = 3;
