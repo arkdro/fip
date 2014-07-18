@@ -14,7 +14,7 @@ public class Fip {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Place p = new Place();
+        Place p = new Place(20, 20, 3);
         p.run();
     }
 }
