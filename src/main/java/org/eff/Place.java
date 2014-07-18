@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class Place {
     private int CELL_SIZE = 10;
-    private int EXTRA_SIZE = 50;
+    private int EXTRA_SIZE = 30;
     private int width = 5;
     private int height = 5;
     private int n_pigs = 3;
