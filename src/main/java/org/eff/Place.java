@@ -81,9 +81,22 @@ public class Place {
         return colors[idx];
     }
 
+    /**
+     * TODO: make if faster: plot only changed cells.
+     */
     private void plot_field(Graphics g) {
-        g.setColor(Color.lightGray);
-        g.fillRect(0, 0, width * CELL_SIZE, height * CELL_SIZE);
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++){
+                Cell cell = field.get_cell(x, y);
+                Color color = Color.decode(
+                        Props.props.getProperty("dirt_color", "#f5f5f5"));
+                if(cell == Cell.GRASS)
+                    color = Color.decode(
+                            Props.props.getProperty("grass_color", "#20a050"));
+                g.setColor(color);
+                plot_field_point(x, y, g);
+            }
+        }
     }
 
     private void plot_pigs(Graphics g) {
