@@ -70,7 +70,9 @@ public class Field {
                 + ", y=" + y + ", w=" + width + ", h=" + height;
         if (diagonal == current) {
             return Wall.SPACE;
-        } else if (horizontal == vertical) {
+        } else if (horizontal == current && vertical == current) {
+            return Wall.CORNER;
+        } else if (horizontal != current && vertical != current) {
             return Wall.CORNER;
         } else if (horizontal == current) {
             return Wall.HORIZONTAL_WALL;
