@@ -79,7 +79,7 @@ public class Field {
         } else if (vertical == current) {
             return Wall.VERTICAL_WALL;
         }
-        assert false : "should not happen"
+        assert false : "look_ahead error which should not happen"
                 + ", x=" + x
                 + ", y=" + y
                 + ", dx=" + dx
