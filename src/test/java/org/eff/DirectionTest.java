@@ -26,7 +26,6 @@ public class DirectionTest {
      */
     @Test
     public void testGetDx() {
-        System.out.println("getDx");
         Direction instance = Direction.NE;
         int exp_x = 1;
         int act_x = instance.getDx();
@@ -38,7 +37,6 @@ public class DirectionTest {
      */
     @Test
     public void testGetDy() {
-        System.out.println("getDy");
         Direction instance = Direction.NE;
         int exp_y = 1;
         int act_y = instance.getDy();
@@ -50,7 +48,6 @@ public class DirectionTest {
      */
     @Test
     public void testFlip_x_dir() {
-        System.out.println("flip_x_dir");
         Direction d = Direction.NW;
         Direction exp = Direction.NE;
         Direction act = Direction.flip_x_dir(d);
@@ -62,7 +59,6 @@ public class DirectionTest {
      */
     @Test
     public void testFlip_y_dir() {
-        System.out.println("flip_y_dir");
         Direction d = Direction.NE;
         Direction exp = Direction.SE;
         Direction act = Direction.flip_y_dir(d);
