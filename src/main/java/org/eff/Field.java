@@ -32,7 +32,7 @@ public class Field {
         return field[idx];
     }
 
-    private Cell get_cell(int x, int y) {
+    public Cell get_cell(int x, int y) {
         int idx = index(x, y);
         return field[idx];
     }
