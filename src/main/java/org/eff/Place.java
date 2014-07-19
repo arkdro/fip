@@ -128,9 +128,8 @@ public class Place {
             if (initial_plot) {
                 g.setColor(Color.gray);
                 g.fillRect(0, 0, this.getWidth(), this.getHeight());
-            } else {
-                g.setColor(Color.white);
             }
+            g.setColor(Color.white);
             g.fillRect(0, 0, width * CELL_SIZE, height * CELL_SIZE);
             plot_pigs(g);
         }
