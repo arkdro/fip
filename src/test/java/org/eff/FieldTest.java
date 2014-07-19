@@ -18,6 +18,14 @@ import org.junit.rules.ExpectedException;
  */
 public class FieldTest {
 
+    private void cut_corner(int width, int height, Field field) {
+        for (int x = width / 2 + 1; x < width; x++) {
+            for (int y = height / 2 + 1; y < height; y++) {
+                field.set_cell(x, y, Cell.GRASS);
+            }
+        }
+    }
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -74,6 +82,17 @@ public class FieldTest {
         field.set_cell(0, 2, Cell.GRASS);
         Wall wall = field.look_ahead(1, 1, -1, -1);
         assertEquals(Wall.VERTICAL_WALL, wall);
+    }
+
+    @Test
+    public void test_look_ahead5() {
+        int width = 6;
+        int height = 6;
+        Field field = new Field(width, height);
+        cut_corner(width, height, field);
+        //field.print_field();
+        Wall wall = field.look_ahead(5, 3, 1, 1);
+        assertEquals(Wall.CORNER, wall);
     }
 
 }
