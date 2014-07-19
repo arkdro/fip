@@ -88,11 +88,15 @@ public class Place {
         for (Pig pig : pigs) {
             Color color = choose_color(idx++);
             g.setColor(color);
-            int scaled_x = pig.getX() * CELL_SIZE;
-            int scaled_y = pig.getY() * CELL_SIZE;
-            g.fillRect(scaled_x, scaled_y, CELL_SIZE, CELL_SIZE);
+            plot_field_point(pig.getX(), pig.getY(), g);
             //System.out.println("" + pig + ", " + color);
         }
+    }
+
+    private void plot_field_point(int x, int y, Graphics g) {
+        int scaled_x = x * CELL_SIZE;
+        int scaled_y = y * CELL_SIZE;
+        g.fillRect(scaled_x, scaled_y, CELL_SIZE, CELL_SIZE);
     }
 
     public Place() {
