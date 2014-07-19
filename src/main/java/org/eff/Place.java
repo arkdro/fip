@@ -24,10 +24,20 @@ public class Place {
     private void init() {
         init_field();
         init_pigsty();
+        // print_pigsty();
     }
 
     private void init_field() {
         field = new Field(width, height);
+        cut_corner();
+    }
+
+    private void cut_corner() {
+        for(int x = width/2; x < width; x++) {
+            for(int y = height/2; y < height; y++) {
+                field.set_cell(x, y, Cell.GRASS);
+            }
+        }
     }
 
     private void init_pigsty() {
