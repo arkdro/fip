@@ -135,7 +135,8 @@ public class Place {
         @Override
         public void paintComponent(Graphics g) {
             if (initial_plot) {
-                g.setColor(Color.gray);
+                g.setColor(Color.decode(
+                        Props.props.getProperty("border_color", "#959595")));
                 g.fillRect(0, 0, this.getWidth(), this.getHeight());
             }
             plot_field(g);
