@@ -81,6 +81,11 @@ public class Place {
         return colors[idx];
     }
 
+    private void plot_field(Graphics g) {
+        g.setColor(Color.lightGray);
+        g.fillRect(0, 0, width * CELL_SIZE, height * CELL_SIZE);
+    }
+
     private void plot_pigs(Graphics g) {
         // g.fillOval(x, y, 40, 40);
         // g.setColor(Color.green);
@@ -133,8 +138,7 @@ public class Place {
                 g.setColor(Color.gray);
                 g.fillRect(0, 0, this.getWidth(), this.getHeight());
             }
-            g.setColor(Color.white);
-            g.fillRect(0, 0, width * CELL_SIZE, height * CELL_SIZE);
+            plot_field(g);
             plot_pigs(g);
         }
     }
