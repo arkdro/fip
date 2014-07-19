@@ -18,13 +18,10 @@ public class Props {
 
     public static Properties get_props() {
         Properties pr = new Properties();
-        // why the fuck 'try-with' throws???
         try {
-            try (FileInputStream in = new FileInputStream("properties")) {
-                pr.load(in);
-            }
+            pr.load(Props.class.getResourceAsStream("/properties"));
         } catch (IOException e) {
-            // "Oh, fuck it." (c)
+            System.out.println("props, exception:" + e);
         }
         return pr;
     }

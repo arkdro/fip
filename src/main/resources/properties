@@ -1,0 +1,6 @@
+dirt_color = #9B6E05
+grass_color = #00A043
+border_color = #959595
+field_width = 30
+field_height = 30
+number_of_pigs = 5
