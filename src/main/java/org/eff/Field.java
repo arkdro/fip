@@ -90,4 +90,16 @@ public class Field {
                 + ", vertical=" + vertical;
         return Wall.SPACE;
     }
+
+    private void print_field() {
+        System.out.println("");
+        for (int y = 0; y < height; y++) {
+            System.out.print("y=" + y + ", ");
+            for (int x = 0; x < width; x++) {
+                System.out.print("\t" + get_cell(x, y));
+            }
+            System.out.println("");
+        }
+    }
+
 }
