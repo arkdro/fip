@@ -5,6 +5,8 @@ package org.eff;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
 /**
@@ -75,6 +77,15 @@ public class Place {
         return drawPanel;
     }
 
+    private void prepare_keys(MyDrawPanel panel) {
+        addAction(panel, "LEFT", -1, 0);
+        addAction(panel, "RIGHT", 1, 0);
+        addAction(panel, "UP", 0, 1);
+        addAction(panel, "DOWN", 0, -1);
+        addAction(panel, "SPACE", 0, 0);
+        addAction(panel, "ENTER", 0, 0);
+    }
+
     private Color choose_color(int i) {
         Color[] colors = {
             Color.BLACK,
@@ -140,6 +151,7 @@ public class Place {
 
     public void run() {
         MyDrawPanel drawPanel = prepare_plot();
+        prepare_keys(drawPanel);
         drawPanel.repaint();
         initial_plot = false;
         for(int i = 0; i < 130; i++){
@@ -166,4 +178,35 @@ public class Place {
             plot_pigs(g);
         }
     }
+
+    public MotionAction addAction(JComponent component, String name, int deltaX, int deltaY) {
+        MotionAction action = new MotionAction(name, deltaX, deltaY);
+
+        KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(name);
+        InputMap inputMap = component.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(pressedKeyStroke, name);
+        component.getActionMap().put(name, action);
+
+        return action;
+    }
+
+    private class MotionAction extends AbstractAction implements ActionListener {
+
+        private int deltaX;
+        private int deltaY;
+
+        public MotionAction(String name, int deltaX, int deltaY) {
+            super(name);
+
+            this.deltaX = deltaX;
+            this.deltaY = deltaY;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // update direction for manually controlled pig
+            System.out.println("action:" + deltaX + "," + deltaY);
+        }
+    }
+
 }
