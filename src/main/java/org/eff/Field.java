@@ -91,7 +91,7 @@ public class Field {
         return Wall.SPACE;
     }
 
-    private void print_field() {
+    public void print_field() {
         System.out.println("");
         for (int y = 0; y < height; y++) {
             System.out.print("y=" + y + ", ");
