@@ -18,12 +18,16 @@ import org.junit.rules.ExpectedException;
  */
 public class FieldTest {
 
-    private void cut_corner(int width, int height, Field field) {
-        for (int x = width / 2 + 1; x < width; x++) {
-            for (int y = height / 2 + 1; y < height; y++) {
+    private void cut_space(Field field, int x1, int y1, int x2, int y2) {
+        for (int x = x1; x <= x2; x++) {
+            for (int y = y1; y <= y2; y++) {
                 field.set_cell(x, y, Cell.GRASS);
             }
         }
+    }
+
+    private void cut_corner(int width, int height, Field field) {
+        cut_space(field, width/2 + 1, height/2 + 1, width-1, height-1);
     }
 
     @Rule
