@@ -90,8 +90,13 @@ public class Place {
     private void prepare_keys(MyDrawPanel panel) {
         addAction(panel, "LEFT", Direction.W, Move.MOVE);
         addAction(panel, "RIGHT", Direction.E, Move.MOVE);
-        addAction(panel, "UP", Direction.N, Move.MOVE);
-        addAction(panel, "DOWN", Direction.S, Move.MOVE);
+        /**
+         * graphics coordinates increase from the top of the screen to the bottom.
+         * So 'UP' key moves to smaller coordinates, namely 'South'.
+         * And 'DOWN' key moves to bigger coordinates, e.g. 'North'.
+         */
+        addAction(panel, "UP", Direction.S, Move.MOVE);
+        addAction(panel, "DOWN", Direction.N, Move.MOVE);
         addAction(panel, "SPACE", null, Move.STOP);
         addAction(panel, "ENTER", null, Move.STOP);
     }
