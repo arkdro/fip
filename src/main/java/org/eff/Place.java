@@ -21,10 +21,12 @@ public class Place {
     private int n_pigs = 3;
     private Field field;
     private Pig[] pigs;
+    private Mower mower;
     private boolean initial_plot = true;
 
     private void init() {
         init_field();
+        init_mower();
         init_pigsty();
         // print_pigsty();
     }
@@ -40,6 +42,10 @@ public class Place {
                 field.set_cell(x, y, Cell.GRASS);
             }
         }
+    }
+
+    private void init_mower() {
+        mower = new Mower(0, 0);
     }
 
     private void init_pigsty() {
@@ -63,6 +69,10 @@ public class Place {
         for(Pig pig: pigs) {
             pig.step(field);
         }
+    }
+
+    private void mower_one_step() {
+        mower.step(field);
     }
 
     private MyDrawPanel prepare_plot() {
@@ -132,6 +142,13 @@ public class Place {
         }
     }
 
+    private void plot_mower(Graphics g) {
+        int idx = 0;
+        Color color = choose_color(idx);
+        g.setColor(color);
+        plot_field_point(mower.getX(), mower.getY(), g);
+    }
+
     private void plot_field_point(int x, int y, Graphics g) {
         int scaled_x = x * CELL_SIZE;
         int scaled_y = y * CELL_SIZE;
@@ -157,6 +174,7 @@ public class Place {
         for(int i = 0; i < 130; i++){
 //            System.out.println("i=" + i);
 //            print_pigsty();
+            mower_one_step();
             pigsty_one_step();
             drawPanel.repaint();
             try {
@@ -175,6 +193,7 @@ public class Place {
                 g.fillRect(0, 0, this.getWidth(), this.getHeight());
             }
             plot_field(g);
+            plot_mower(g);
             plot_pigs(g);
         }
     }
