@@ -88,12 +88,12 @@ public class Place {
     }
 
     private void prepare_keys(MyDrawPanel panel) {
-        addAction(panel, "LEFT", -1, 0);
-        addAction(panel, "RIGHT", 1, 0);
-        addAction(panel, "UP", 0, 1);
-        addAction(panel, "DOWN", 0, -1);
-        addAction(panel, "SPACE", 0, 0);
-        addAction(panel, "ENTER", 0, 0);
+        addAction(panel, "LEFT", Direction.W, Move.MOVE);
+        addAction(panel, "RIGHT", Direction.E, Move.MOVE);
+        addAction(panel, "UP", Direction.N, Move.MOVE);
+        addAction(panel, "DOWN", Direction.S, Move.MOVE);
+        addAction(panel, "SPACE", null, Move.STOP);
+        addAction(panel, "ENTER", null, Move.STOP);
     }
 
     private Color choose_color(int i) {
@@ -198,8 +198,9 @@ public class Place {
         }
     }
 
-    public MotionAction addAction(JComponent component, String name, int deltaX, int deltaY) {
-        MotionAction action = new MotionAction(name, deltaX, deltaY);
+    public MotionAction addAction(JComponent component, String name,
+            Direction dir, Move move) {
+        MotionAction action = new MotionAction(name, dir, move);
 
         KeyStroke pressedKeyStroke = KeyStroke.getKeyStroke(name);
         InputMap inputMap = component.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -211,20 +212,20 @@ public class Place {
 
     private class MotionAction extends AbstractAction implements ActionListener {
 
-        private int deltaX;
-        private int deltaY;
+        private Direction dir;
+        private Move move;
 
-        public MotionAction(String name, int deltaX, int deltaY) {
+        public MotionAction(String name, Direction dir, Move move) {
             super(name);
 
-            this.deltaX = deltaX;
-            this.deltaY = deltaY;
+            this.dir = dir;
+            this.move = move;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             // update direction for manually controlled pig
-            System.out.println("action:" + deltaX + "," + deltaY);
+            System.out.println("action:" + dir + ", " + move);
         }
     }
 
