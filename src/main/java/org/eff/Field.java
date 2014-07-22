@@ -63,7 +63,9 @@ public class Field {
     public Wall look_ahead(int x, int y, int dx, int dy) {
 
         Cell horizontal = get_cell(x, y, dx, 0);
+        Cell horizontal_neg_vertical = get_cell(x, y, dx, -dy);
         Cell vertical = get_cell(x, y, 0, dy);
+        Cell vertical_neg_horizontal = get_cell(x, y, -dx, dy);
         Cell diagonal = get_cell(x, y, dx, dy);
         Cell current = get_cell(x, y, 0, 0);
         assert (current != Cell.OUT) : "current is OUT, x=" + x
@@ -74,21 +76,13 @@ public class Field {
             return Wall.CORNER;
         } else if (horizontal != current && vertical != current) {
             return Wall.CORNER;
-        } else if (horizontal == current) {
+        } else if (horizontal == current && horizontal_neg_vertical == current) {
             return Wall.HORIZONTAL_WALL;
-        } else if (vertical == current) {
+        } else if (vertical == current && vertical_neg_horizontal == current) {
             return Wall.VERTICAL_WALL;
+        } else {
+            return Wall.CORNER;
         }
-        assert false : "look_ahead error which should not happen"
-                + ", x=" + x
-                + ", y=" + y
-                + ", dx=" + dx
-                + ", dy=" + dy
-                + ", current=" + current
-                + ", diagonal=" + diagonal
-                + ", horizontal=" + horizontal
-                + ", vertical=" + vertical;
-        return Wall.SPACE;
     }
 
     public void print_field() {
