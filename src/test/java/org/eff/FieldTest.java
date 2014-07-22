@@ -99,4 +99,50 @@ public class FieldTest {
         assertEquals(Wall.CORNER, wall);
     }
 
+    /**
+     * a corner and a narrow line of free space extending along the wall
+     */
+    @Test
+    public void test_look_ahead6() {
+        int width = 6;
+        int height = 6;
+        Field field = new Field(width, height);
+        cut_space(field, 1, 1, 3, 3);
+        //field.print_field();
+        Wall wall = field.look_ahead(4, 0, -1, -1);
+        assertEquals(Wall.CORNER, wall);
+    }
+
+    @Test
+    public void test_look_ahead6b() {
+        int width = 6;
+        int height = 6;
+        Field field = new Field(width, height);
+        cut_space(field, 1, 1, 3, 3);
+        //field.print_field();
+        Wall wall = field.look_ahead(0, 3, -1, -1);
+        assertEquals(Wall.CORNER, wall);
+    }
+
+    @Test
+    public void test_look_ahead6c() {
+        int width = 6;
+        int height = 6;
+        Field field = new Field(width, height);
+        cut_space(field, 1, 1, 3, 3);
+        //field.print_field();
+        Wall wall = field.look_ahead(0, 4, -1, -1);
+        assertEquals(Wall.CORNER, wall);
+    }
+
+    @Test
+    public void test_look_ahead7() {
+        int width = 6;
+        int height = 6;
+        Field field = new Field(width, height);
+        cut_space(field, 1, 1, 1, 3);
+        Wall wall = field.look_ahead(1, 0, -1, -1);
+        assertEquals(Wall.HORIZONTAL_WALL, wall);
+    }
+
 }
