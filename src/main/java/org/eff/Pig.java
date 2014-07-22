@@ -138,4 +138,8 @@ public class Pig {
             move_rest = cur_step + MAX_SPEED;
         }
     }
+
+    void set_dir(Direction d) {
+        dir = d;
+    }
 }

@@ -225,7 +225,7 @@ public class Place {
         @Override
         public void actionPerformed(ActionEvent e) {
             // update direction for manually controlled pig
-            System.out.println("action:" + dir + ", " + move);
+            mower.change_motion(dir, move);
         }
     }
 
