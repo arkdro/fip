@@ -33,12 +33,24 @@ public class Place {
 
     private void init_field() {
         field = new Field(width, height);
-        cut_corner();
+        plant_weed();
     }
 
-    private void cut_corner() {
-        for(int x = width/2; x < width; x++) {
-            for(int y = height/2; y < height; y++) {
+    private void plant_weed() {
+        int right_gap = 3;
+        int left_gap = 3;
+        int min_field_width = 2;
+        int horizontal_gap = left_gap + right_gap + min_field_width;
+        int top_gap = 2;
+        int bottom_gap = 2;
+        int min_field_height = 2;
+        int vertical_gap = top_gap + bottom_gap + min_field_height;
+        if(width < horizontal_gap)
+            return;
+        if(height < vertical_gap)
+            return;
+        for(int x = left_gap; x < width - right_gap; x++) {
+            for(int y = top_gap; y < height - bottom_gap; y++) {
                 field.set_cell(x, y, Cell.GRASS);
             }
         }
