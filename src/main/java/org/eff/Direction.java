@@ -37,6 +37,22 @@ enum Direction {
         return Direction.values()[dir_idx];
     }
 
+    public static Direction diagonal_random_direction() {
+        Random r = new Random();
+        int len = Direction.values().length;
+        int dir_idx = r.nextInt(len);
+        Direction dir = null;
+        for(int offset = 0; offset < len; offset++) {
+            int rounded_idx = (dir_idx + offset) % len;
+            dir = Direction.values()[rounded_idx];
+            int dx = dir.getDx();
+            int dy = dir.getDy();
+            if(dx != 0 && dy != 0)
+                break;
+        }
+        return dir;
+    }
+
     public static Direction flip_x_dir(Direction d) {
         switch (d) {
             case NW:
