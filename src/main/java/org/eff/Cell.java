@@ -9,7 +9,7 @@ package org.eff;
  *
  * @author user1
  */
-enum Cell {
+public enum Cell {
 
     GRASS,
     DIRT,
