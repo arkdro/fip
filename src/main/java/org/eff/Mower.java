@@ -12,9 +12,17 @@ public class Mower extends Pig {
     private static final int max_speed = 5;
     private boolean is_moving;
 
+    private void start_moving() {
+        is_moving = true;
+    }
+
+    private void stop_moving() {
+        is_moving = false;
+    }
+
     public Mower(int x, int y) {
         super(x, y, max_speed, null);
-        is_moving = false;
+        stop_moving();
     }
 
     @Override
@@ -28,10 +36,10 @@ public class Mower extends Pig {
         switch (move) {
             case MOVE:
                 set_dir(dir);
-                is_moving = true;
+                start_moving();
                 break;
             case STOP:
-                is_moving = false;
+                stop_moving();
                 break;
         }
     }
