@@ -96,4 +96,14 @@ public class Field {
         }
     }
 
+    public void fill_cells(Cell src, Cell dst) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (get_cell(x, y) == src) {
+                    set_cell(x, y, dst);
+                }
+            }
+        }
+    }
+
 }

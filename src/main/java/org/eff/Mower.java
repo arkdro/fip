@@ -10,7 +10,9 @@ package org.eff;
 public class Mower extends Pig {
 
     private static final int max_speed = 5;
+    private int pots = 3;
     private boolean is_moving;
+    private boolean is_doing_mow;
 
     private void start_moving() {
         is_moving = true;
@@ -20,16 +22,94 @@ public class Mower extends Pig {
         is_moving = false;
     }
 
+    private void start_doing_mow() {
+        is_doing_mow = true;
+    }
+
+    private void stop_doing_mow() {
+        is_doing_mow = false;
+    }
+
+    private void move_coord(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    private void store_step(int x, int y, Field field) {
+        field.set_cell(x, y, Cell.STEP);
+    }
+
+    private void decrease_pots() {
+        pots--;
+        assert (pots > 0) : "all your pot are belong to us"; // game over. Temp.
+    }
+
+    private void fix_steps(Field field) {
+        set_steps(field, Cell.DIRT);
+    }
+
+    private void clear_steps(Field field) {
+        set_steps(field, Cell.GRASS);
+    }
+
+    private void set_steps(Field field, Cell filler) {
+        field.fill_cells(Cell.STEP, filler);
+    }
+
+    private void set_init_location() {
+        set_init_location(0, 0);
+    }
+
+    private void set_init_location(int x, int y) {
+        this.x = x;
+        this.y = y;
+        stop_moving();
+        stop_doing_mow();
+    }
+
     public Mower(int x, int y) {
         super(x, y, max_speed, null);
-        stop_moving();
+        set_init_location(x, y);
     }
 
     @Override
     public void update_coordinates(Field field){
         if(is_moving) {
-            super.update_coordinates(field);
+            handle_move(field);
         }
+    }
+
+    public void handle_move(Field field) {
+        int dx = dir.getDx();
+        int dy = dir.getDy();
+        int next_x = x + dx;
+        int next_y = y + dy;
+        Cell next_cell = field.get_cell(next_x, next_y);
+        if (next_cell == Cell.PIG || next_cell == Cell.STEP) {
+            walk_into_bad_place(field);
+            return;
+        }
+        Cell cur_cell = field.get_cell(x, y);
+        if (cur_cell == Cell.DIRT && next_cell == Cell.GRASS) {
+            start_doing_mow();
+            move_coord(next_x, next_y);
+            return;
+        }
+        if (is_doing_mow) {
+            store_step(x, y, field);
+            move_coord(next_x, next_y);
+            if (next_cell == Cell.DIRT) {
+                stop_moving();
+                stop_doing_mow();
+                fix_steps(field);
+            }
+        }
+    }
+
+    public void walk_into_bad_place(Field field) {
+        clear_steps(field);
+        decrease_pots();
+        set_init_location(); // should the invincibility be set on init?
     }
 
     public void change_motion(Direction dir, Move move) {
