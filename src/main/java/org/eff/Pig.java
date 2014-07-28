@@ -11,12 +11,13 @@ import java.util.Random;
  * A thing that moves inside a place.
  */
 public class Pig {
-    private int x;
-    private int y;
     private int speed;
-    private Direction dir;
     private int move_rest = MAX_SPEED;
     private int id = (int) (Math.random() * 1000);
+
+    int x;
+    int y;
+    Direction dir;
 
     private void move_common() {
         int dx = dir.getDx();
