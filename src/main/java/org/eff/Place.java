@@ -136,14 +136,27 @@ public class Place {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++){
                 Cell cell = field.get_cell(x, y);
-                Color color = Color.decode(
-                        Props.props.getProperty("dirt_color", "#f5f5f5"));
-                if(cell == Cell.GRASS)
-                    color = Color.decode(
-                            Props.props.getProperty("grass_color", "#20a050"));
+                Color color = choose_cell_color(cell);
                 g.setColor(color);
                 plot_field_point(x, y, g);
             }
+        }
+    }
+
+    private Color choose_cell_color(Cell cell) {
+        switch(cell) {
+            case GRASS:
+                return Color.decode(
+                        Props.props.getProperty("grass_color", "#20a050"));
+            case DIRT:
+                return Color.decode(
+                        Props.props.getProperty("dirt_color", "#f5f5f5"));
+            case STEP:
+                return Color.decode(
+                        Props.props.getProperty("step_color", "#505050"));
+            default:
+                return Color.decode(
+                        Props.props.getProperty("dirt_color", "#f5f5f5"));
         }
     }
 
