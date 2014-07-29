@@ -87,8 +87,13 @@ public class Place {
         mower.step(field);
     }
 
-    private MyDrawPanel prepare_plot() {
+    private JFrame prepare_frame() {
         JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        return frame;
+    }
+
+    private MyDrawPanel prepare_panel(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         MyDrawPanel drawPanel = new MyDrawPanel();
@@ -197,7 +202,8 @@ public class Place {
     }
 
     public void run() {
-        MyDrawPanel drawPanel = prepare_plot();
+        JFrame frame = prepare_frame();
+        MyDrawPanel drawPanel = prepare_panel(frame);
         prepare_keys(drawPanel);
         drawPanel.repaint();
         initial_plot = false;
@@ -213,6 +219,7 @@ public class Place {
                 Thread.sleep(100);
             } catch (Exception ex) {}
         }
+        frame.dispose();
     }
 
     class MyDrawPanel extends JPanel {
