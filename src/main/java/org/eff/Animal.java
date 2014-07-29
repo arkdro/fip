@@ -87,7 +87,7 @@ public abstract class Animal {
         }
     }
 
-    void set_dir(Direction d) {
+    public void set_dir(Direction d) {
         dir = d;
     }
 
