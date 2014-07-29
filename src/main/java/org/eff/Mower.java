@@ -7,7 +7,7 @@ package org.eff;
  *
  * @author user1
  */
-public class Mower extends Pig {
+public class Mower extends Animal {
 
     private static final int max_speed = 5;
     private int pots = 3;
