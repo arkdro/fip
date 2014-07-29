@@ -106,7 +106,9 @@ public class Mower extends Pig {
                 stop_doing_mow();
                 fix_steps(field);
             }
+            return;
         }
+        move_coord(next_x, next_y);
     }
 
     public void walk_into_bad_place(Field field) {
