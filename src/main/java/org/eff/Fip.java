@@ -18,5 +18,6 @@ public class Fip {
         int pigs = Integer.parseInt(Props.props.getProperty("number_of_pigs", "3"));
         Place p = new Place(width, height, pigs);
         p.run();
+        System.exit(0);
     }
 }

@@ -41,7 +41,6 @@ public class Mower extends Animal {
 
     private void decrease_pots() {
         pots--;
-        assert (pots > 0) : "all your pot are belong to us"; // game over. Temp.
     }
 
     private void fix_steps(Field field) {
@@ -127,5 +126,9 @@ public class Mower extends Animal {
                 stop_moving();
                 break;
         }
+    }
+
+    public boolean has_pots() {
+        return (pots > 0);
     }
 }

@@ -206,6 +206,8 @@ public class Place {
 //            print_pigsty();
             mower_one_step();
             pigsty_one_step();
+            if(!mower.has_pots())
+                break;
             drawPanel.repaint();
             try {
                 Thread.sleep(100);
