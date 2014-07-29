@@ -2,6 +2,26 @@ package org.eff;
 
 public class Pig extends Animal {
 
+    private void check_for_mower(Field field, Mower mower) {
+        boolean caught = check_for_mower_itself(field, mower);
+        if(!caught)
+            check_for_mower_steps(field, mower);
+    }
+
+    private boolean check_for_mower_itself(Field field, Mower mower) {
+        if(mower.getX() == x && mower.getY() == y) {
+            mower.walk_into_bad_place(field);
+            return true;
+        }
+        return false;
+    }
+
+    private void check_for_mower_steps(Field field, Mower mower) {
+        Cell cell = field.get_cell(x, y);
+        if (cell == Cell.STEP)
+            mower.walk_into_bad_place(field);
+    }
+
     private void move_common() {
         int dx = dir.getDx();
         int dy = dir.getDy();
@@ -42,7 +62,9 @@ public class Pig extends Animal {
      *
      * a pig requires at least a two-cell wide road to move (bouncing from
      * walls)
+     * @param field
      */
+    @Override
     public void update_coordinates(Field field) {
         int dx = dir.getDx();
         int dy = dir.getDy();
@@ -62,4 +84,8 @@ public class Pig extends Animal {
         }
     }
 
+    public void step(Field field, Mower mower) {
+        step(field);
+        check_for_mower(field, mower);
+    }
 }

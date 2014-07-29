@@ -79,7 +79,7 @@ public class Place {
 
     private void pigsty_one_step() {
         for(Pig pig: pigs) {
-            pig.step(field);
+            pig.step(field, mower);
         }
     }
 
