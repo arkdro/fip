@@ -10,7 +10,7 @@ import java.util.Random;
  * @author user1
  * A thing that moves inside a place.
  */
-public class Animal {
+public abstract class Animal {
     private int speed;
     private int move_rest = MAX_SPEED;
     private int id = (int) (Math.random() * 1000);
@@ -18,32 +18,6 @@ public class Animal {
     int x;
     int y;
     Direction dir;
-
-    private void move_common() {
-        int dx = dir.getDx();
-        int dy = dir.getDy();
-        x += dx;
-        y += dy;
-    }
-
-    private void move_further() {
-        move_common();
-    }
-
-    private void bounce_corner() {
-        dir = Direction.flip_x_dir(Direction.flip_y_dir(dir));
-        move_common();
-    }
-
-    private void bounce_horizontal_wall() {
-        dir = Direction.flip_y_dir(dir);
-        move_common();
-    }
-
-    private void bounce_vertical_wall() {
-        dir = Direction.flip_x_dir(dir);
-        move_common();
-    }
 
     public int getId() {
         return id;
@@ -77,33 +51,6 @@ public class Animal {
     private static Random r = new Random();
 
     public static final int MAX_SPEED = 10;
-
-    /**
-     * - space.
-     * - horizontal wall. Flip y.
-     * - vertical wall. Flip x.
-     * - (inner | outer) corner. Flip x, y.
-     *
-     * a pig requires at least a two-cell wide road to move (bouncing from walls)
-     */
-    public void update_coordinates(Field field) {
-        int dx = dir.getDx();
-        int dy = dir.getDy();
-        switch (field.look_ahead(x, y, dx, dy)) {
-            case SPACE:
-                move_further();
-                break;
-            case CORNER:
-                bounce_corner();
-                break;
-            case HORIZONTAL_WALL:
-                bounce_horizontal_wall();
-                break;
-            case VERTICAL_WALL:
-                bounce_vertical_wall();
-                break;
-        }
-    }
 
     public Animal(int x, int y) {
         this.x = x;
@@ -143,4 +90,7 @@ public class Animal {
     void set_dir(Direction d) {
         dir = d;
     }
+
+    abstract public void update_coordinates(Field field);
+
 }
