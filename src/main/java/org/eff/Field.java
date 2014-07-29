@@ -22,13 +22,17 @@ public class Field {
     private Cell get_cell(int x, int y, int dx, int dy) {
         int new_x = x + dx;
         int new_y = y + dy;
-        if (new_x < 0
-                || new_x >= width
-                || new_y < 0
-                || new_y >= height) {
+        return get_cell_bounded(new_x, new_y);
+    }
+
+    public Cell get_cell_bounded(int x, int y) {
+        if (x < 0
+                || x >= width
+                || y < 0
+                || y >= height) {
             return Cell.OUT;
         }
-        int idx = index(new_x, new_y);
+        int idx = index(x, y);
         return field[idx];
     }
 

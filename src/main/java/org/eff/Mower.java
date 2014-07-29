@@ -84,7 +84,10 @@ public class Mower extends Pig {
         int dy = dir.getDy();
         int next_x = x + dx;
         int next_y = y + dy;
-        Cell next_cell = field.get_cell(next_x, next_y);
+        Cell next_cell = field.get_cell_bounded(next_x, next_y);
+        if(next_cell == Cell.OUT) {
+            return; // no move
+        }
         if (next_cell == Cell.PIG || next_cell == Cell.STEP) {
             walk_into_bad_place(field);
             return;
