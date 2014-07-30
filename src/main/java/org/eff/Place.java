@@ -3,11 +3,12 @@
  */
 package org.eff;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.Set;
+import javax.swing.*;
 
 /**
  *
@@ -178,10 +179,25 @@ public class Place {
     }
 
     private void plot_mower(Graphics g) {
+        plot_mower_steps(g);
+        plot_mower_oneself(g);
+    }
+
+    private void plot_mower_oneself(Graphics g) {
         int idx = 0;
         Color color = choose_color(idx);
         g.setColor(color);
         plot_field_point(mower.getX(), mower.getY(), g);
+    }
+
+    private void plot_mower_steps(Graphics g) {
+        Set<Point> steps = mower.get_steps();
+        Color color = Color.decode(
+                Props.props.getProperty("step_color", "#505050"));
+        g.setColor(color);
+        for (Point c: steps) {
+            plot_field_point(c.x, c.y, g);
+        }
     }
 
     private void plot_field_point(int x, int y, Graphics g) {
@@ -207,7 +223,7 @@ public class Place {
         prepare_keys(drawPanel);
         drawPanel.repaint();
         initial_plot = false;
-        for(int i = 0; i < 130; i++){
+        for(int i = 0; i < 130; ){
 //            System.out.println("i=" + i);
 //            print_pigsty();
             mower_one_step();

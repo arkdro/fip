@@ -1,5 +1,8 @@
 package org.eff;
 
+import java.awt.Point;
+import java.util.Set;
+
 public class Pig extends Animal {
 
     private void check_for_mower(Field field, Mower mower) {
@@ -17,8 +20,8 @@ public class Pig extends Animal {
     }
 
     private void check_for_mower_steps(Field field, Mower mower) {
-        Cell cell = field.get_cell(x, y);
-        if (cell == Cell.STEP)
+        Set<Point> steps = mower.get_steps();
+        if (steps.contains(new Point(x, y)))
             mower.walk_into_bad_place(field);
     }
 

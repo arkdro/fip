@@ -3,6 +3,10 @@
  */
 package org.eff;
 
+import java.awt.Point;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author user1
@@ -13,6 +17,7 @@ public class Mower extends Animal {
     private int pots = 3;
     private boolean is_moving;
     private boolean is_doing_mow;
+    private HashSet<Point> steps;
 
     private void start_moving() {
         is_moving = true;
@@ -35,8 +40,8 @@ public class Mower extends Animal {
         this.y = y;
     }
 
-    private void store_step(int x, int y, Field field) {
-        field.set_cell(x, y, Cell.STEP);
+    private void store_step(int x, int y) {
+        steps.add(new Point(x, y));
     }
 
     private void decrease_pots() {
@@ -44,15 +49,14 @@ public class Mower extends Animal {
     }
 
     private void fix_steps(Field field) {
-        set_steps(field, Cell.DIRT);
+        for (Point c : steps) {
+            field.set_cell(c.x, c.y, Cell.DIRT);
+        }
+        clear_steps();
     }
 
-    private void clear_steps(Field field) {
-        set_steps(field, Cell.GRASS);
-    }
-
-    private void set_steps(Field field, Cell filler) {
-        field.fill_cells(Cell.STEP, filler);
+    private void clear_steps() {
+        steps.clear();
     }
 
     private void init_mower_data() {
@@ -64,6 +68,7 @@ public class Mower extends Animal {
         this.y = y;
         stop_moving();
         stop_doing_mow();
+        steps = new HashSet<>();
     }
 
     public Mower(int x, int y) {
@@ -98,7 +103,7 @@ public class Mower extends Animal {
             return;
         }
         if (is_doing_mow) {
-            store_step(x, y, field);
+            store_step(x, y);
             move_coord(next_x, next_y);
             if (next_cell == Cell.DIRT) {
                 stop_moving();
@@ -111,7 +116,7 @@ public class Mower extends Animal {
     }
 
     public void walk_into_bad_place(Field field) {
-        clear_steps(field);
+        clear_steps();
         decrease_pots();
         init_mower_data(); // should the invincibility be set on init?
     }
@@ -130,5 +135,9 @@ public class Mower extends Animal {
 
     public boolean has_pots() {
         return (pots > 0);
+    }
+
+    public Set<Point> get_steps() {
+        return steps;
     }
 }
