@@ -14,6 +14,7 @@ public class Field {
     private final int width;
     private int height;
     private Cell[] field;
+    private double mowed;
 
     private int index(int x, int y) {
         return y * width + x;
@@ -49,6 +50,7 @@ public class Field {
         for (int i = 0; i < total; i++) {
             field[i] = Cell.DIRT;
         }
+        mowed = 0;
     }
 
     public int get_width() {
@@ -108,6 +110,22 @@ public class Field {
                 }
             }
         }
+    }
+
+    public void update_mowed_percentage() {
+        int cnt = 0;
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                if (get_cell(x, y) == Cell.DIRT)
+                    cnt++;
+            }
+        }
+        mowed = ((double) cnt) / (height * width);
+    }
+
+    // do not bother with initial borders set to DIRT
+    public double get_mowed_percentage() {
+        return mowed;
     }
 
 }

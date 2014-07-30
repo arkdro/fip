@@ -217,25 +217,33 @@ public class Place {
         init();
     }
 
-    public void run() {
+    public LStatus run() {
         JFrame frame = prepare_frame();
         MyDrawPanel drawPanel = prepare_panel(frame);
         prepare_keys(drawPanel);
         drawPanel.repaint();
         initial_plot = false;
+        LStatus st = null;
         for(int i = 0; i < 130; ){
 //            System.out.println("i=" + i);
 //            print_pigsty();
             mower_one_step();
             pigsty_one_step();
-            if(!mower.has_pots())
+            if(!mower.has_pots()) {
+                st = LStatus.NO_MORE_POTS;
                 break;
+            }
+            if(field.get_mowed_percentage() > 0.67) {
+                st = LStatus.LEVEL_COMPLETED;
+                break;
+            }
             drawPanel.repaint();
             try {
                 Thread.sleep(100);
             } catch (Exception ex) {}
         }
         frame.dispose();
+        return st;
     }
 
     class MyDrawPanel extends JPanel {

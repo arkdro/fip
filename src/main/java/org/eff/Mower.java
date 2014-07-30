@@ -53,6 +53,7 @@ public class Mower extends Animal {
             field.set_cell(c.x, c.y, Cell.DIRT);
         }
         clear_steps();
+        field.update_mowed_percentage();
     }
 
     private void clear_steps() {
