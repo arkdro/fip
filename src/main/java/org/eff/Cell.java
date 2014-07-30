@@ -13,7 +13,6 @@ public enum Cell {
 
     GRASS,
     DIRT,
-    PIG,
     STEP,
     OUT // beyond the field
 }

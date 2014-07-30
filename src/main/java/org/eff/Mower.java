@@ -64,6 +64,10 @@ public class Mower extends Animal {
         init_mower_data(0, 0);
     }
 
+    private boolean is_next_cell_step(int x, int y) {
+        return steps.contains(new Point(x, y));
+    }
+
     private void init_mower_data(int x, int y) {
         this.x = x;
         this.y = y;
@@ -93,7 +97,7 @@ public class Mower extends Animal {
         if(next_cell == Cell.OUT) {
             return; // no move
         }
-        if (next_cell == Cell.PIG || next_cell == Cell.STEP) {
+        if(is_next_cell_step(next_x, next_y)) {
             walk_into_bad_place(field);
             return;
         }
