@@ -55,11 +55,11 @@ public class Mower extends Animal {
         field.fill_cells(Cell.STEP, filler);
     }
 
-    private void set_init_location() {
-        set_init_location(0, 0);
+    private void init_mower_data() {
+        init_mower_data(0, 0);
     }
 
-    private void set_init_location(int x, int y) {
+    private void init_mower_data(int x, int y) {
         this.x = x;
         this.y = y;
         stop_moving();
@@ -68,7 +68,7 @@ public class Mower extends Animal {
 
     public Mower(int x, int y) {
         super(x, y, max_speed, null);
-        set_init_location(x, y);
+        init_mower_data(x, y);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class Mower extends Animal {
     public void walk_into_bad_place(Field field) {
         clear_steps(field);
         decrease_pots();
-        set_init_location(); // should the invincibility be set on init?
+        init_mower_data(); // should the invincibility be set on init?
     }
 
     public void change_motion(Direction dir, Move move) {
