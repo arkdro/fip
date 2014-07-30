@@ -112,6 +112,14 @@ public class Field {
         }
     }
 
+    /**
+     * do sort of image segmentation. Find regions of GRASS. If a region does
+     * not contain a pig, then fill the region with DIRT.
+     */
+    public void update_mowed_regions(Pig[] pigs) {
+
+    }
+
     public void update_mowed_percentage() {
         int cnt = 0;
         for (int y = 0; y < height; y++) {

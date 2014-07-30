@@ -18,6 +18,7 @@ public class Mower extends Animal {
     private boolean is_moving;
     private boolean is_doing_mow;
     private HashSet<Point> steps;
+    private boolean just_fixed_steps;
 
     private void start_moving() {
         is_moving = true;
@@ -53,7 +54,15 @@ public class Mower extends Animal {
             field.set_cell(c.x, c.y, Cell.DIRT);
         }
         clear_steps();
-        field.update_mowed_percentage();
+        set_just_fixed_steps();
+    }
+
+    private void set_just_fixed_steps() {
+        just_fixed_steps = true;
+    }
+
+    private void clear_just_fixed_steps() {
+        just_fixed_steps = false;
     }
 
     private void clear_steps() {
@@ -74,6 +83,7 @@ public class Mower extends Animal {
         stop_moving();
         stop_doing_mow();
         steps = new HashSet<>();
+        clear_just_fixed_steps();
     }
 
     public Mower(int x, int y) {
@@ -89,6 +99,7 @@ public class Mower extends Animal {
     }
 
     public void handle_move(Field field) {
+        clear_just_fixed_steps();
         int dx = dir.getDx();
         int dy = dir.getDy();
         int next_x = x + dx;
@@ -144,5 +155,9 @@ public class Mower extends Animal {
 
     public Set<Point> get_steps() {
         return steps;
+    }
+
+    public boolean just_fixed_steps() {
+        return just_fixed_steps;
     }
 }
