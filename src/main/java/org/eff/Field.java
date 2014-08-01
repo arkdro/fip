@@ -26,6 +26,22 @@ public class Field {
         return get_cell_bounded(new_x, new_y);
     }
 
+    private int[] copy_field(int wall, int space) {
+        int len = width * height;
+        int[] tmp = new int[len];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int idx = index(x, y);
+                if (get_cell(x, y) == Cell.DIRT) {
+                    tmp[idx] = wall;
+                } else {
+                    tmp[idx] = space;
+                }
+            }
+        }
+        return tmp;
+    }
+
     public Cell get_cell_bounded(int x, int y) {
         if (x < 0
                 || x >= width
