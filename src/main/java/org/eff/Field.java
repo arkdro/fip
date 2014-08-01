@@ -113,8 +113,8 @@ public class Field {
     }
 
     /**
-     * perform kind of image segmentation: find regions of GRASS. If a region
-     * does not contain a pig, then fill the region with DIRT.
+     * find regions of GRASS. If a region does not contain a pig, then fill the
+     * region with DIRT.
      */
     public void update_mowed_regions(Pig[] pigs) {
 
