@@ -228,6 +228,9 @@ public class Place {
 //            System.out.println("i=" + i);
 //            print_pigsty();
             mower_one_step();
+            if (mower.just_fixed_steps()) {
+                field.update_mowed_regions(pigs);
+            }
             pigsty_one_step();
             if(!mower.has_pots()) {
                 st = LStatus.NO_MORE_POTS;

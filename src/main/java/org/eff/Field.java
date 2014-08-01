@@ -5,6 +5,9 @@
  */
 package org.eff;
 
+import java.awt.Point;
+import org.eff.fill.Fill;
+
 /**
  *
  * @author user1
@@ -24,6 +27,49 @@ public class Field {
         int new_x = x + dx;
         int new_y = y + dy;
         return get_cell_bounded(new_x, new_y);
+    }
+
+    private int[] copy_field(int wall, int space) {
+        int len = width * height;
+        int[] tmp = new int[len];
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int idx = index(x, y);
+                if (get_cell(x, y) == Cell.DIRT) {
+                    tmp[idx] = wall;
+                } else {
+                    tmp[idx] = space;
+                }
+            }
+        }
+        return tmp;
+    }
+
+    private int[] fill_grassed_rest(int[] input, int wall, int space) {
+        int[] tmp = input.clone();
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int idx = index(x, y);
+                if (tmp[idx] == space) {
+                    tmp[idx] = wall;
+                }
+            }
+        }
+        return tmp;
+    }
+
+    private void fill_field_regions(int[] input, int wall) {
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int idx = index(x, y);
+                if (input[idx] == wall) {
+                    set_cell(x, y, Cell.DIRT);
+//                } else {
+//                    set_cell(x, y, Cell.GRASS);
+                }
+            }
+        }
+        
     }
 
     public Cell get_cell_bounded(int x, int y) {
@@ -110,6 +156,39 @@ public class Field {
                 }
             }
         }
+    }
+
+    /**
+     * find regions of GRASS. If a region does not contain a pig, then fill the
+     * region with DIRT.
+     *
+     * In other words: fill the region containing a pig with the filler. And do
+     * not touch this region in the output field. Fill other grassed regions
+     * with dirt. And move these regions in the output field.
+     *
+     * @param pigs
+     */
+    public void update_mowed_regions(Pig[] pigs) {
+        int wall = 0;
+        int space = 1;
+        int filler = 2;
+        int[] acc = copy_field(wall, space);
+        for (Pig pig : pigs) {
+            int x = pig.getX();
+            int y = pig.getY();
+            if (get_cell(x, y) == Cell.DIRT) {
+                continue;
+            }
+            int idx = index(x, y);
+            if(acc[idx] == filler) {
+                continue;
+            }
+            int[] tmp = acc.clone();
+            Fill f = new Fill(tmp, width, height);
+            acc = f.fill(x, y, space, filler);
+        }
+        int[] res = fill_grassed_rest(acc, wall, space);
+        fill_field_regions(res, wall);
     }
 
     public void update_mowed_percentage() {
