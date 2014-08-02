@@ -34,13 +34,21 @@ public class Place {
     private int add_dirt_pig_inactivity_timeout;
     private int dirt_pigs_max_number;
     private int dirt_pigs_init_number;
+    private int current_run_loop_delay;
 
     private void init() {
         init_props();
         init_field();
         init_mower();
         init_pigsty();
+        init_run_props();
         // print_pigsty();
+    }
+
+    private void init_run_props() {
+        current_run_loop_delay = run_loop_delay - start_level * run_loop_delay_step;
+        if(run_loop_delay < 0)
+            run_loop_delay = 0;
     }
 
     private void init_props() {
@@ -290,7 +298,7 @@ public class Place {
             }
             drawPanel.repaint();
             try {
-                Thread.sleep(100);
+                Thread.sleep(current_run_loop_delay);
             } catch (Exception ex) {}
         }
         frame.dispose();
