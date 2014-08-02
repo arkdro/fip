@@ -28,12 +28,34 @@ public class Place {
     private int left_gap = 3;
     private int top_gap = 2;
     private int bottom_gap = 2;
+    private int start_level;
+    private int run_loop_delay;
+    private int run_loop_delay_step; // when level goes up
+    private int add_dirt_pig_inactivity_timeout;
+    private int dirt_pigs_max_number;
+    private int dirt_pigs_init_number;
 
     private void init() {
+        init_props();
         init_field();
         init_mower();
         init_pigsty();
         // print_pigsty();
+    }
+
+    private void init_props() {
+        start_level = Integer.parseInt(
+                Props.props.getProperty("start_level", "1"));
+        run_loop_delay = Integer.parseInt(
+                Props.props.getProperty("run_loop_delay", "100"));
+        run_loop_delay_step = Integer.parseInt(
+                Props.props.getProperty("run_loop_delay_step", "10"));
+        add_dirt_pig_inactivity_timeout = Integer.parseInt(
+                Props.props.getProperty("add_dirt_pig_inactivity_timeout", "60000"));
+        dirt_pigs_max_number = Integer.parseInt(
+                Props.props.getProperty("dirt_pigs_max_number", "3"));
+        dirt_pigs_init_number = Integer.parseInt(
+                Props.props.getProperty("dirt_pigs_init_number", "2"));
     }
 
     private void init_field() {
