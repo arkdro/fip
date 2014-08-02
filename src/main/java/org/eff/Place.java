@@ -24,6 +24,10 @@ public class Place {
     private Pig[] pigs;
     private Mower mower;
     private boolean initial_plot = true;
+    private int right_gap = 3;
+    private int left_gap = 3;
+    private int top_gap = 2;
+    private int bottom_gap = 2;
 
     private void init() {
         init_field();
@@ -38,12 +42,8 @@ public class Place {
     }
 
     private void plant_weed() {
-        int right_gap = 3;
-        int left_gap = 3;
         int min_field_width = 2;
         int horizontal_gap = left_gap + right_gap + min_field_width;
-        int top_gap = 2;
-        int bottom_gap = 2;
         int min_field_height = 2;
         int vertical_gap = top_gap + bottom_gap + min_field_height;
         if(width < horizontal_gap)
