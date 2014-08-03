@@ -148,7 +148,7 @@ public class Place {
     private int choose_speed(int max) {
         int r = (int) (Math.random() * max);
         if(r < max/2) {
-            r = max;
+            r = Pig.MAX_SPEED;
         }
         return r;
     }
