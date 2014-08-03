@@ -45,7 +45,7 @@ public class Place {
     private void init_level(int level) {
         init_props();
         init_field();
-        init_mower();
+        init_mower(level);
         init_pigsty(level);
         init_run_props();
         current_level = level;
@@ -94,8 +94,10 @@ public class Place {
         }
     }
 
-    private void init_mower() {
-        mower = new Mower(0, 0);
+    private void init_mower(int level) {
+        int init_speed = 5;
+        int speed = (int) ((Pig.MAX_SPEED - init_speed) / 10.0 * level + init_speed);
+        mower = new Mower(0, 0, speed);
     }
 
     private void init_pigsty(int level) {

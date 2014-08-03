@@ -13,7 +13,6 @@ import java.util.Set;
  */
 public class Mower extends Animal {
 
-    private static final int max_speed = 5;
     private int pots = 3;
     private boolean is_moving;
     private boolean is_doing_mow;
@@ -82,8 +81,8 @@ public class Mower extends Animal {
         clear_just_fixed_steps();
     }
 
-    public Mower(int x, int y) {
-        super(x, y, max_speed, null);
+    public Mower(int x, int y, int speed) {
+        super(x, y, speed, null);
         init_mower_data(x, y);
     }
 
