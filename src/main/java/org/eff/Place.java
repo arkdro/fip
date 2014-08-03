@@ -99,7 +99,7 @@ public class Place {
     }
 
     private void init_pigsty(int level) {
-        Pig[] dirt = init_dirt_pigs();
+        Pig[] dirt = init_dirt_pigs(level);
         Pig[] grass = init_grass_pigs(level);
         int total = dirt.length + grass.length;
         Pig[] p = new Pig[total];
@@ -117,12 +117,17 @@ public class Place {
         for (int i = 0; i < num_of_pigs; i++) {
             int x = r.nextInt(max_x) + right_gap;
             int y = r.nextInt(max_y) + top_gap;
-            p[i] = new PigBuilder().setX(x).setY(y).createPigShort();
+            int speed = choose_speed(level);
+            p[i] = new PigBuilder()
+                    .setX(x)
+                    .setY(y)
+                    .setSpeed(speed)
+                    .createPigShort();
         }
         return p;
     }
 
-    private Pig[] init_dirt_pigs() {
+    private Pig[] init_dirt_pigs(int level) {
         Random r = new Random();
         Pig[] p = new Pig[dirt_pigs_init_number];
         int max_x = right_gap + left_gap;
@@ -130,9 +135,22 @@ public class Place {
         for(int i = 0; i < dirt_pigs_init_number; i++) {
             int x = r.nextInt(width);
             int y = height - 1;
-            p[i] = new PigBuilder().setX(x).setY(y).createPigShort();
+            int speed = choose_speed(level);
+            p[i] = new PigBuilder()
+                    .setX(x)
+                    .setY(y)
+                    .setSpeed(speed)
+                    .createPigShort();
         }
         return p;
+    }
+
+    private int choose_speed(int max) {
+        int r = (int) (Math.random() * max);
+        if(r < max/2) {
+            r = max;
+        }
+        return r;
     }
 
     private void print_pigsty() {
