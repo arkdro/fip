@@ -188,6 +188,12 @@ public class Place {
         addAction(panel, "ENTER", null, Move.STOP);
     }
 
+    private void show_final_picture(Graphics g) {
+        g.setColor(Color.decode("#a5a5a5"));
+        g.fillRect(0, 0, width * CELL_SIZE, height * CELL_SIZE);
+        label.setText("Game Over");
+    }
+
     private Color choose_color(int i) {
         Color[] colors = {
             Color.BLACK,
@@ -309,6 +315,10 @@ public class Place {
                 break;
             }
         }
+        drawPanel.repaint(); // show final picture
+        try {
+            Thread.sleep(3000);
+        } catch (Exception ex) {}
         frame.dispose();
     }
 
@@ -349,10 +359,14 @@ public class Place {
                         Props.props.getProperty("border_color", "#959595")));
                 g.fillRect(0, 0, this.getWidth(), this.getHeight());
             }
-            plot_field(g);
-            plot_mower(g);
-            plot_pigs(g);
-            plot_level_info(g);
+            if (mower.has_pots()) {
+                plot_field(g);
+                plot_mower(g);
+                plot_pigs(g);
+                plot_level_info(g);
+            } else {
+                show_final_picture(g);
+            }
         }
     }
 
