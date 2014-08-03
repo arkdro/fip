@@ -286,6 +286,8 @@ public class Place {
             mower_one_step();
             if (mower.just_fixed_steps()) {
                 field.update_mowed_regions(pigs);
+                field.update_mowed_percentage();
+                mower.clear_just_fixed_steps();
             }
             pigsty_one_step();
             if(!mower.has_pots()) {
