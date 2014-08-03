@@ -283,7 +283,6 @@ public class Place {
 
         LStatus res = LStatus.LEVEL_COMPLETED;
         for(int i = start_level; res == LStatus.LEVEL_COMPLETED; i++) {
-            System.out.println("i=" + i);
             res = run_one_level(i, drawPanel);
             if (res == LStatus.NO_MORE_POTS) {
                 break;
@@ -297,8 +296,6 @@ public class Place {
 
         LStatus st = null;
         for(int i = 0; i < 130; ){
-//            System.out.println("i=" + i);
-//            print_pigsty();
             mower_one_step();
             if (mower.just_fixed_steps()) {
                 field.update_mowed_regions(pigs);
