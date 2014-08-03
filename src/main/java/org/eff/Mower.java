@@ -61,10 +61,6 @@ public class Mower extends Animal {
         just_fixed_steps = true;
     }
 
-    private void clear_just_fixed_steps() {
-        just_fixed_steps = false;
-    }
-
     private void clear_steps() {
         steps.clear();
     }
@@ -155,6 +151,10 @@ public class Mower extends Animal {
 
     public Set<Point> get_steps() {
         return steps;
+    }
+
+    public void clear_just_fixed_steps() {
+        just_fixed_steps = false;
     }
 
     public boolean just_fixed_steps() {
