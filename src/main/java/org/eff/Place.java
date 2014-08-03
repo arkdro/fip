@@ -19,7 +19,6 @@ public class Place {
     private int EXTRA_SIZE = 30;
     private int width = 5;
     private int height = 5;
-    private int n_pigs = 3;
     private Field field;
     private Pig[] pigs;
     private Mower mower;
@@ -38,11 +37,14 @@ public class Place {
 
     private void init() {
         init_props();
+    }
+
+    private void init_level(int level) {
+        init_props();
         init_field();
         init_mower();
-        init_pigsty();
+        init_pigsty(level);
         init_run_props();
-        // print_pigsty();
     }
 
     private void init_run_props() {
@@ -91,9 +93,9 @@ public class Place {
         mower = new Mower(0, 0);
     }
 
-    private void init_pigsty() {
+    private void init_pigsty(int level) {
         Pig[] dirt = init_dirt_pigs();
-        Pig[] grass = init_grass_pigs();
+        Pig[] grass = init_grass_pigs(level);
         int total = dirt.length + grass.length;
         Pig[] p = new Pig[total];
         System.arraycopy(dirt, 0, p, 0, dirt.length);
@@ -101,9 +103,9 @@ public class Place {
         pigs = p;
     }
 
-    private Pig[] init_grass_pigs() {
+    private Pig[] init_grass_pigs(int level) {
         Random r = new Random();
-        int num_of_pigs = start_level;
+        int num_of_pigs = level;
         Pig[] p = new Pig[num_of_pigs];
         int max_x = width - right_gap - left_gap;
         int max_y = height - top_gap - bottom_gap;
@@ -269,11 +271,23 @@ public class Place {
     public Place(int w, int h, int p) {
         width = w;
         height = h;
-        n_pigs = p;
         init();
     }
 
-    public LStatus run() {
+    public void run() {
+        LStatus res = LStatus.LEVEL_COMPLETED;
+        for(int i = start_level; res == LStatus.LEVEL_COMPLETED; i++) {
+            System.out.println("i=" + i);
+            res = run_one_level(i);
+            if (res == LStatus.NO_MORE_POTS) {
+                break;
+            }
+        }
+    }
+
+    public LStatus run_one_level(int level) {
+        init_level(level);
+
         JFrame frame = prepare_frame();
         MyDrawPanel drawPanel = prepare_panel(frame);
         prepare_keys(drawPanel);
