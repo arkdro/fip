@@ -5,9 +5,6 @@
  */
 package org.eff;
 
-import java.awt.Point;
-import org.eff.fill.Fill;
-
 /**
  *
  * @author user1
