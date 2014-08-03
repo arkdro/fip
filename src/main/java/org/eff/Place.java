@@ -275,24 +275,26 @@ public class Place {
     }
 
     public void run() {
-        LStatus res = LStatus.LEVEL_COMPLETED;
-        for(int i = start_level; res == LStatus.LEVEL_COMPLETED; i++) {
-            System.out.println("i=" + i);
-            res = run_one_level(i);
-            if (res == LStatus.NO_MORE_POTS) {
-                break;
-            }
-        }
-    }
-
-    public LStatus run_one_level(int level) {
-        init_level(level);
-
         JFrame frame = prepare_frame();
         MyDrawPanel drawPanel = prepare_panel(frame);
         prepare_keys(drawPanel);
         drawPanel.repaint();
         initial_plot = false;
+
+        LStatus res = LStatus.LEVEL_COMPLETED;
+        for(int i = start_level; res == LStatus.LEVEL_COMPLETED; i++) {
+            System.out.println("i=" + i);
+            res = run_one_level(i, drawPanel);
+            if (res == LStatus.NO_MORE_POTS) {
+                break;
+            }
+        }
+        frame.dispose();
+    }
+
+    public LStatus run_one_level(int level, MyDrawPanel drawPanel) {
+        init_level(level);
+
         LStatus st = null;
         for(int i = 0; i < 130; ){
 //            System.out.println("i=" + i);
@@ -317,7 +319,6 @@ public class Place {
                 Thread.sleep(current_run_loop_delay);
             } catch (Exception ex) {}
         }
-        frame.dispose();
         return st;
     }
 
