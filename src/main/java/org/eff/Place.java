@@ -17,6 +17,7 @@ import javax.swing.*;
 public class Place {
     private int CELL_SIZE = 10;
     private int EXTRA_SIZE = 30;
+    private int TEXT_SIZE = 30;
     private int width = 5;
     private int height = 5;
     private Field field;
@@ -34,6 +35,8 @@ public class Place {
     private int dirt_pigs_max_number;
     private int dirt_pigs_init_number;
     private int current_run_loop_delay;
+    private JLabel label;
+    private int current_level;
 
     private void init() {
         init_props();
@@ -45,6 +48,8 @@ public class Place {
         init_mower();
         init_pigsty(level);
         init_run_props();
+        current_level = level;
+
     }
 
     private void init_run_props() {
@@ -152,13 +157,19 @@ public class Place {
         return frame;
     }
 
+    private void prepare_label(JFrame frame) {
+        label = new JLabel("label text");
+        frame.getContentPane().add(BorderLayout.SOUTH, label);
+    }
+
     private MyDrawPanel prepare_panel(JFrame frame) {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         MyDrawPanel drawPanel = new MyDrawPanel();
 
         frame.getContentPane().add(drawPanel);
-        frame.setSize(width * CELL_SIZE + EXTRA_SIZE, height * CELL_SIZE + EXTRA_SIZE);
+        frame.setSize(width * CELL_SIZE + EXTRA_SIZE,
+                height * CELL_SIZE + TEXT_SIZE + EXTRA_SIZE);
         frame.setVisible(true);
         return drawPanel;
     }
@@ -264,6 +275,15 @@ public class Place {
         g.fillRect(scaled_x, scaled_y, CELL_SIZE, CELL_SIZE);
     }
 
+    private void plot_level_info(Graphics g) {
+        String text = build_label_text();
+        label.setText(text);
+    }
+
+    private String build_label_text() {
+        return "Level: " + current_level + ", Pot: " + mower.get_pots();
+    }
+
     public Place() {
         init();
     }
@@ -276,6 +296,7 @@ public class Place {
 
     public void run() {
         JFrame frame = prepare_frame();
+        prepare_label(frame);
         MyDrawPanel drawPanel = prepare_panel(frame);
         prepare_keys(drawPanel);
         drawPanel.repaint();
@@ -331,6 +352,7 @@ public class Place {
             plot_field(g);
             plot_mower(g);
             plot_pigs(g);
+            plot_level_info(g);
         }
     }
 
