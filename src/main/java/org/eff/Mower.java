@@ -149,6 +149,10 @@ public class Mower extends Animal {
         return (pots > 0);
     }
 
+    public int get_pots() {
+        return pots;
+    }
+
     public Set<Point> get_steps() {
         return steps;
     }
