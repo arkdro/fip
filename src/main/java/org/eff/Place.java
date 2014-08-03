@@ -302,13 +302,13 @@ public class Place {
                 field.update_mowed_percentage();
                 mower.clear_just_fixed_steps();
             }
+            if(field.get_mowed_percentage() > 0.67) {
+                st = LStatus.LEVEL_COMPLETED;
+                break;
+            }
             pigsty_one_step();
             if(!mower.has_pots()) {
                 st = LStatus.NO_MORE_POTS;
-                break;
-            }
-            if(field.get_mowed_percentage() > 0.67) {
-                st = LStatus.LEVEL_COMPLETED;
                 break;
             }
             drawPanel.repaint();
