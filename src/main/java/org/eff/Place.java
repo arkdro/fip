@@ -6,6 +6,8 @@ package org.eff;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import javax.swing.*;
@@ -37,9 +39,11 @@ public class Place {
     private int current_run_loop_delay;
     private JLabel label;
     private int current_level;
+    Map<Cell, Color> cell_colors;
 
     private void init() {
         init_props();
+        init_cell_colors();
     }
 
     private void init_level(int level) {
@@ -50,6 +54,17 @@ public class Place {
         init_run_props();
         current_level = level;
 
+    }
+
+    private void init_cell_colors() {
+        Map<Cell, Color> c = new HashMap<>();
+        c.put(Cell.GRASS, Color.decode(
+                Props.props.getProperty("grass_color", "#20a050")));
+        c.put(Cell.DIRT, Color.decode(
+                Props.props.getProperty("dirt_color", "#f5f5f5")));
+        c.put(Cell.STEP, Color.decode(
+                Props.props.getProperty("step_color", "#505050")));
+        cell_colors = c;
     }
 
     private void init_run_props() {
@@ -247,17 +262,13 @@ public class Place {
     private Color choose_cell_color(Cell cell) {
         switch(cell) {
             case GRASS:
-                return Color.decode(
-                        Props.props.getProperty("grass_color", "#20a050"));
+                return cell_colors.get(cell);
             case DIRT:
-                return Color.decode(
-                        Props.props.getProperty("dirt_color", "#f5f5f5"));
+                return cell_colors.get(cell);
             case STEP:
-                return Color.decode(
-                        Props.props.getProperty("step_color", "#505050"));
+                return cell_colors.get(cell);
             default:
-                return Color.decode(
-                        Props.props.getProperty("dirt_color", "#f5f5f5"));
+                return cell_colors.get(Cell.DIRT);
         }
     }
 
